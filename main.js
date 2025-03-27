@@ -12,7 +12,7 @@ let stop = {
     zoom: 13,
     title: "Cape Reinga",
     nummer: 1,
-    user: "vintiyannick"
+    user: "vintiyannick",
 };
 
 // Karte initialisieren
