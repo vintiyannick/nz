@@ -6,6 +6,15 @@ let lat = -34.423889;
 let lng = 172.6775;
 let zoom = 13;
 
+let stop = {
+    lat: -34.423889,
+    lng: 172.6775,
+    zoom: 13,
+    title: "Cape Reinga",
+    nummer: 1,
+    user: "vintiyannick"
+};
+
 // Karte initialisieren
 let map = L.map('map').setView([lat, lng], zoom);
 
