@@ -198,28 +198,40 @@ const STOPS = [
     },
 ];
 
+for (let i = 0; i < STOPS.length; i++) {
+    console.log(i, STOPS[i], STOPS[i].title);
+}
+
 // Karte initialisieren
 let map = L.map('map');
+
+// Overlays definieren
+let overlays = {
+    etappen: L.featureGroup().addTo(map),
+}
+
+// Layercontrol
+L.control.layers({
+    "OpenStreetMap": L.tileLayer.provider('OpenStreetMap.Mapnik').addTo(map),
+    "OpenTopoMap": L.tileLayer.provider('OpenTopoMap').addTo(map),
+    "WorldImagery": L.tileLayer.provider('Esri.WorldImagery').addTo(map),
+}, {
+    "Etappen": overlays.etappen,
+}).addTo(map);
 
 // Maßstab
 L.control.scale({
     imperial: false,
 }).addTo(map);
 
-// Hintergrund definieren
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-
 // loop über Etappen
-for (let i=0; i<STOPS.length; i++) {
+for (let i = 0; i < STOPS.length; i++) {
 
     // Marker zeichnen
     let marker = L.marker([STOPS[i].lat, STOPS[i].lng]).addTo(map);
 
     // Popup definieren
-marker.bindPopup(`
+    marker.bindPopup(`
     <h2> ${STOPS[i].title} </h2>
     <ul>
         <li>Geogr. Breite: ${STOPS[i].lat.toFixed(5)}°</li>
@@ -244,9 +256,9 @@ marker.bindPopup(`
 }
 
 // auf Änderungen beim Pulldown reagieren
-document.querySelector("#pulldown select").onchange = function(evt) {
+document.querySelector("#pulldown select").onchange = function (evt) {
     let url = `https://${evt.target.value}.github.io/nz`;
-   // console.log(url);
-   // console.log(evt.target.value);
-   window.location = url;
+    // console.log(url);
+    // console.log(evt.target.value);
+    window.location = url;
 }
