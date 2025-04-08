@@ -201,6 +201,11 @@ const STOPS = [
 // Karte initialisieren
 let map = L.map('map');
 
+// Maßstab
+L.control.scale({
+    imperial: false,
+}).addTo(map);
+
 // Hintergrund definieren
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
